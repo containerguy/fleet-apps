@@ -1,0 +1,134 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-onlyoffice-config
+  namespace: default
+data:
+  http-common.conf: |
+    upstream docservice {
+      server localhost:8000;
+    }
+    upstream spellchecker {
+      server localhost:8080;
+    }
+    upstream example {
+      server localhost:3000;
+    }
+    map $http_host $this_host {
+        "" $host;
+        default $http_host;
+    }
+    map $http_x_forwarded_proto $the_scheme {
+         default $http_x_forwarded_proto;
+         "" $scheme;
+    }
+    map $http_x_forwarded_host $the_host {
+        default $http_x_forwarded_host;
+        "" $this_host;
+    }
+    map $http_upgrade $proxy_connection {
+      default upgrade;
+      "" close;
+    }
+    proxy_set_header Host $http_host;
+    proxy_set_header Upgrade $http_upgrade;
+    #proxy_set_header Connection $proxy_connection;
+    proxy_set_header X-Forwarded-Host $the_host;
+    proxy_set_header X-Forwarded-Proto $the_scheme;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: test-office
+  labels:
+    app: test-office
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-office
+  template:
+    metadata:
+      labels:
+        app: test-office
+        version: v0.0.1
+    spec:
+      containers:
+      - name: test-office
+        image: onlyoffice/documentserver
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+          limits:
+            cpu: 1500m
+            memory: 1600Mi
+        env:
+        - name: TZ
+          value: Europe/Berlin
+        ports:
+        - containerPort: 80
+        volumeMounts:
+            - name: configuration
+              mountPath: /etc/nginx/includes/http-common.conf
+              readOnly: true
+              subPath: http-common.conf
+      volumes:
+        - name: configuration
+          configMap:
+            defaultMode: 0666
+            name: test-onlyoffice-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-office
+  annotations:
+    traefik.backend.circuitbreaker: "NetworkErrorRatio() > 0.5"
+spec:
+  ports:
+  - name: http
+    targetPort: 80
+    port: 80
+  selector:
+    app: test-office
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-office
+  annotations:
+    kubernetes.io/ingress.class: traefik
+    certmanager.k8s.io/cluster-issuer: "certmanager-azure-familie-keller"
+    certmanager.k8s.io/acme-challenge-type: dns01
+    ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  rules:
+  - host: test-office.familie-keller.info
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: test-office
+            port:
+              name: http
+  tls:
+    - hosts:
+        - test-office.familie-keller.info
+      secretName: test-office.familie-keller.info-tls
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: test-office.familie-keller.info-dns
+spec:
+  secretName: test-office.familie-keller.info-tls
+  issuerRef:
+    name: certmanager-azure-familie-keller
+    kind: ClusterIssuer
+  dnsNames:
+    - test-office.familie-keller.info
