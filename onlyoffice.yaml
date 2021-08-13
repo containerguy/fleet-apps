@@ -94,41 +94,5 @@ spec:
     port: 80
   selector:
     app: test-office
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: test-office
-  annotations:
-    kubernetes.io/ingress.class: traefik
-    certmanager.k8s.io/cluster-issuer: "certmanager-azure-familie-keller"
-    certmanager.k8s.io/acme-challenge-type: dns01
-    ingress.kubernetes.io/ssl-redirect: "true"
-spec:
-  rules:
-  - host: test-office.familie-keller.info
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: test-office
-            port:
-              name: http
-  tls:
-    - hosts:
-        - test-office.familie-keller.info
-      secretName: test-office.familie-keller.info-tls
----
-apiVersion: cert-manager.io/v1alpha2
-kind: Certificate
-metadata:
-  name: test-office.familie-keller.info-dns
-spec:
-  secretName: test-office.familie-keller.info-tls
-  issuerRef:
-    name: certmanager-azure-familie-keller
-    kind: ClusterIssuer
-  dnsNames:
-    - test-office.familie-keller.info
+
+
