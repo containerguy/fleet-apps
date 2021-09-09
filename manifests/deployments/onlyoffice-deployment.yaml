@@ -1,0 +1,43 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: test-office
+  labels:
+    app: test-office
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-office
+  template:
+    metadata:
+      labels:
+        app: test-office
+        version: v0.0.1
+    spec:
+      containers:
+      - name: test-office
+        image: onlyoffice/documentserver
+        resources:
+          requests:
+            cpu: 100m
+            memory: 200Mi
+          limits:
+            cpu: 1500m
+            memory: 1600Mi
+        env:
+        - name: TZ
+          value: Europe/Berlin
+        ports:
+        - containerPort: 80
+        volumeMounts:
+            - name: configuration
+              mountPath: /etc/nginx/includes/http-common.conf
+              readOnly: true
+              subPath: http-common.conf
+      volumes:
+        - name: configuration
+          configMap:
+            defaultMode: 0666
+            name: test-onlyoffice-config
