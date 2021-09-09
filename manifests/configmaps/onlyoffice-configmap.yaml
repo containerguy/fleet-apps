@@ -3,7 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: test-onlyoffice-config
-  namespace: default
+  namespace: office
 data:
   http-common.conf: |
     upstream docservice {

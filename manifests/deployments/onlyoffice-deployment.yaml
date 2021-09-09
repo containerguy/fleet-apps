@@ -3,6 +3,7 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: test-office
+  namespace: office
   labels:
     app: test-office
 spec:
