@@ -1,4 +1,4 @@
-namespace: fleet-certmanager
+defaultNamespace: fleet-certmanager
 helm:
   repo: https://charts.jetstack.io
   chart: cert-manager
