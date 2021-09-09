@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: test-onlyoffice-config
+  name: onlyoffice-config
   namespace: office
 data:
   http-common.conf: |

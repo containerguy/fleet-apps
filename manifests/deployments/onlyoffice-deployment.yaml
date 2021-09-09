@@ -2,23 +2,23 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: test-office
+  name: office
   namespace: office
   labels:
-    app: test-office
+    app: office
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: test-office
+      app: office
   template:
     metadata:
       labels:
-        app: test-office
+        app: office
         version: v0.0.1
     spec:
       containers:
-      - name: test-office
+      - name: office
         image: onlyoffice/documentserver
         resources:
           requests:
@@ -41,4 +41,4 @@ spec:
         - name: configuration
           configMap:
             defaultMode: 0666
-            name: test-onlyoffice-config
+            name: onlyoffice-config
