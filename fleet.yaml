@@ -1,0 +1,7 @@
+namespace: fleet-test
+targetCustomizations:
+- name: test
+  yaml:
+    overlays:
+    # Refers to overlays/noreplication folder
+    - noreplication
