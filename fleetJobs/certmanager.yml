@@ -1,0 +1,13 @@
+---
+kind: GitRepo
+apiVersion: fleet.cattle.io/v1alpha1
+metadata:
+  name: certmanager
+  namespace: fleet-default
+spec:
+  repo: https://github.com/eluminare/fleet-apps
+  branch: main
+  paths:
+  - helm/certmanager
+  targets:
+  - clusterSelector: {}
