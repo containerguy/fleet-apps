@@ -1,0 +1,26 @@
+---
+kind: GitRepo
+apiVersion: fleet.cattle.io/v1alpha1
+metadata:
+  name: monitoring
+  namespace: fleet-default
+spec:
+  repo: https://github.com/eluminare/fleet-apps
+  branch: main
+  paths:
+  - helm/monitoring
+  targets:
+  - clusterSelector: {}
+---
+kind: GitRepo
+apiVersion: fleet.cattle.io/v1alpha1
+metadata:
+  name: monitoring-crd
+  namespace: fleet-default
+spec:
+  repo: https://github.com/eluminare/fleet-apps
+  branch: main
+  paths:
+  - helm/monitoring-crd
+  targets:
+  - clusterSelector: {}
