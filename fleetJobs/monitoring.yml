@@ -2,25 +2,25 @@
 kind: GitRepo
 apiVersion: fleet.cattle.io/v1alpha1
 metadata:
-  name: monitoring
+  name: rancher-monitoring
   namespace: fleet-default
 spec:
   repo: https://github.com/eluminare/fleet-apps
   branch: main
   paths:
-  - helm/monitoring
+  - helm/rancher-monitoring
   targets:
   - clusterSelector: {}
 ---
 kind: GitRepo
 apiVersion: fleet.cattle.io/v1alpha1
 metadata:
-  name: monitoring-crd
+  name: rancher-monitoring-crd
   namespace: fleet-default
 spec:
   repo: https://github.com/eluminare/fleet-apps
   branch: main
   paths:
-  - helm/monitoring-crd
+  - helm/rancher-monitoring-crd
   targets:
   - clusterSelector: {}
