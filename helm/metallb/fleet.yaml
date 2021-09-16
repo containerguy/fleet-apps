@@ -1,0 +1,12 @@
+defaultNamespace: metallb-system
+helm:
+  repo: https://metallb.github.io/metallb
+  chart: metallb
+  releaseName: metallb
+#  values:
+#    configInline:
+#      address-pools:
+#      - name: default
+#        protocol: layer2
+#        addresses:
+#        - 192.168.150.24
