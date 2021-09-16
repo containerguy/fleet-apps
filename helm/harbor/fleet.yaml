@@ -1,0 +1,25 @@
+defaultNamespace: harbor
+helm:
+  repo: https://helm.goharbor.io
+  chart: harbor
+  releaseName: harbor
+  version: v1.7.2
+  values:
+    expose:
+      type: ingress
+    persistence:
+      persistentVolumeClaim:
+        registry:
+          storageClass: longhorn
+        chartmuseum:
+          storageClass: longhorn
+        jobservice:
+          storageClass: longhorn
+        database:
+          storageClass: longhorn
+        redis:
+          storageClass: longhorn
+        trivy:
+          storageClass: longhorn
+
+    
