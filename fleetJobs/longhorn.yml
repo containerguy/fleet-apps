@@ -1,0 +1,26 @@
+---
+kind: GitRepo
+apiVersion: fleet.cattle.io/v1alpha1
+metadata:
+  name: longhorn
+  namespace: fleet-default
+spec:
+  repo: https://github.com/eluminare/fleet-apps
+  branch: main
+  paths:
+  - helm/longhorn
+  targets:
+  - clusterSelector: {}
+---
+kind: GitRepo
+apiVersion: fleet.cattle.io/v1alpha1
+metadata:
+  name: longhorn-crd
+  namespace: fleet-default
+spec:
+  repo: https://github.com/eluminare/fleet-apps
+  branch: main
+  paths:
+  - helm/longhorn-crd
+  targets:
+  - clusterSelector: {}
