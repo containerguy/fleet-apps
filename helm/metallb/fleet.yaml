@@ -3,10 +3,28 @@ helm:
   repo: https://metallb.github.io/metallb
   chart: metallb
   releaseName: metallb
-#  values:
-#    configInline:
-#      address-pools:
-#      - name: default
-#        protocol: layer2
-#        addresses:
-#        - 192.168.150.24
+targetCustomizations:
+- name: test
+  helm:
+    values:
+      configInline:
+        address-pools:
+        - name: default
+          protocol: layer2
+          addresses:
+          - 192.168.150.241-192.168.150.245
+  clusterSelector:
+    matchLabels:
+      env: test
+- name: work
+  helm:
+    values:
+      configInline:
+        address-pools:
+        - name: default
+          protocol: layer2
+          addresses:
+          - 192.168.150.231-192.168.150.235
+  clusterSelector:
+    matchLabels:
+      env: work
