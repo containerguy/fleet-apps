@@ -8,6 +8,6 @@ spec:
   repo: https://github.com/eluminare/fleet-apps
   branch: main
   paths:
-  - manifests
+  - manifests/office
   targets:
   - clusterSelector: {}
