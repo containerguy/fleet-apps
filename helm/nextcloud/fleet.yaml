@@ -54,6 +54,15 @@ helm:
       enabled: true
     rbac:
       enabled: true
+    livenessProbe:
+      enabled: true
+      initialDelaySeconds: 120
+      failureThreshold: 10
+    readinessProbe:
+      enabled: true
+      initialDelaySeconds: 120
+      failureThreshold: 10
+    
 targetCustomizations:
 - name: work
   helm:
