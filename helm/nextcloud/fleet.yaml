@@ -1,0 +1,76 @@
+defaultNamespace: nextcloud
+namespace: nextcloud
+helm:
+  repo: https://nextcloud.github.io/helm
+  chart: nextcloud
+  releaseName: nextcloud
+  values:
+    ingress:
+      enabled: true
+    nextcloud:
+      host: cloud.familie-keller.info
+    mariadb:
+      enabled: true
+      master:
+        persistence:
+          enabled: true
+          accessMode: ReadWriteMany
+          size: 10Gi
+          storageClass: longhorn
+    cronjob:
+      enabled: true
+      image:
+        repository: busybox
+        pullPolicy: IfNotPresent
+        schedule: "*/5 * * * *"
+        curlInsecure: true
+        failedJobsHistoryLimit: 5
+        successfulJobsHistoryLimit: 2
+        resources:
+          limits:
+            cpu: 200m
+            memory: 512Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+    service:
+      type: ClusterIP
+      port: 8080
+    persistence:
+      enabled: true
+      storageClass: "longhorn"
+      accessMode: ReadWriteMany
+      size: 5Gi
+    resources:
+      limits:
+        cpu: 800m
+        memory: 2048Mi
+      requests:
+        cpu: 50m
+        memory: 128Mi
+    hpa:
+      enabled: true
+    metrics:
+      enabled: true
+    rbac:
+      enabled: true
+targetCustomizations:
+- name: work
+  helm:
+    values:
+      nextcloud:
+        host: cloud.work.familie-keller.info
+  clusterSelector:
+    matchLabels:
+      env: work
+- name: test
+  helm:
+    values:
+      nextcloud:
+        host: cloud.test.familie-keller.info
+  clusterSelector:
+    matchLabels:
+      env: test
+
+
+  
