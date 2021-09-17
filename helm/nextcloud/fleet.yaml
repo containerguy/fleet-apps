@@ -20,7 +20,7 @@ helm:
     cronjob:
       enabled: true
       image:
-        repository: busybox
+        repository: nextcloud
         pullPolicy: IfNotPresent
         schedule: "*/5 * * * *"
         curlInsecure: true
