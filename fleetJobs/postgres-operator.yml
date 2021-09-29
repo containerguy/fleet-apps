@@ -5,9 +5,13 @@ metadata:
   name: postgres-operator
   namespace: fleet-default
 spec:
-  repo: https://github.com/eluminare/fleet-apps
+  repo: https://github.com/zalando/postgres-operator
   branch: main
   paths:
-  - helm/postgres-operator
+#  - manifests/configmap.yaml
+#  - manifests/operator-service-account-rbac.yaml
+#  - manifests/postgres-operator.yaml
+#  - manifests/api-service.yaml
+   - manifests/
   targets:
   - clusterSelector: {}
