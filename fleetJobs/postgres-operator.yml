@@ -6,7 +6,7 @@ metadata:
   namespace: fleet-default
 spec:
   repo: https://github.com/zalando/postgres-operator
-  branch: main
+  branch: master
   paths:
 #  - manifests/configmap.yaml
 #  - manifests/operator-service-account-rbac.yaml
