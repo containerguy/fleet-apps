@@ -49,7 +49,7 @@ helm:
         cpu: 50m
         memory: 128Mi
     hpa:
-      enabled: true
+      enabled: false
     metrics:
       enabled: true
     rbac:
