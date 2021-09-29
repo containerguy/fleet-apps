@@ -45,7 +45,7 @@ helm:
       type: ClusterIP
       port: 8080
     persistence:
-      enabled: true
+      enabled: false
       storageClass: "longhorn"
       accessMode: ReadWriteMany
       size: 5Gi
