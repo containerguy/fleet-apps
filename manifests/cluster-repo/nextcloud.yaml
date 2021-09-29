@@ -4,4 +4,4 @@ metadata:
   name: nextcloud
 spec:
   gitBranch: master
-  gitRepo: https://nextcloud.github.io/helm/
+  gitRepo:  https://github.com/nextcloud/helm/
