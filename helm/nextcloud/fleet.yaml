@@ -11,12 +11,20 @@ helm:
       host: cloud.familie-keller.info
     mariadb:
       enabled: true
+      db:
+        name: nextcloud
+        password: "default123!"
+        user: ncdbuser
       master:
         persistence:
           enabled: true
           accessMode: ReadWriteMany
           size: 10Gi
           storageClass: longhorn
+      redis:
+        enabled: true
+        usePassword: true
+        password: "default456?"
     cronjob:
       enabled: true
       image:
