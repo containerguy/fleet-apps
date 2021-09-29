@@ -1,5 +1,5 @@
 defaultNamespace: longhorn-system
 helm:
-  repo: https://github.com/zalando/postgres-operator/charts
-  chart: postgres-operator
+  repo: https://github.com/zalando/postgres-operator/
+  chart: ./charts/postgres-operator
   releaseName: postgres-operator
