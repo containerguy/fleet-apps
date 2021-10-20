@@ -1,5 +1,3 @@
-defaultNamespace: longhorn-system
+defaultNamespace: postgres
 helm:
-  repo: https://github.com/zalando/postgres-operator/
-  chart: ./charts/postgres-operator
-  releaseName: postgres-operator
+  chart: https://github.com/zalando/postgres-operator/archive/refs/tags/v1.7.0.tar.gz
