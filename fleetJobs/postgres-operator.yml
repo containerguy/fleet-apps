@@ -1,0 +1,17 @@
+---
+kind: GitRepo
+apiVersion: fleet.cattle.io/v1alpha1
+metadata:
+  name: postgres-operator
+  namespace: fleet-default
+spec:
+  repo: https://github.com/zalando/postgres-operator
+  branch: master
+  paths:
+#  - manifests/configmap.yaml
+#  - manifests/operator-service-account-rbac.yaml
+#  - manifests/postgres-operator.yaml
+#  - manifests/api-service.yaml
+   - manifests/
+  targets:
+  - clusterSelector: {}

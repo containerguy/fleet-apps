@@ -1,0 +1,3 @@
+defaultNamespace: postgres
+helm:
+  chart: https://github.com/zalando/postgres-operator/blob/master/charts/postgres-operator/postgres-operator-1.7.0.tgz

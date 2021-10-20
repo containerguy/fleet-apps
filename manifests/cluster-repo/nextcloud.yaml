@@ -1,0 +1,7 @@
+apiVersion: catalog.cattle.io/v1
+kind: ClusterRepo
+metadata:
+  name: nextcloud
+spec:
+  gitBranch: master
+  gitRepo:  https://github.com/nextcloud/helm/
