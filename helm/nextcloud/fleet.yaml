@@ -20,9 +20,11 @@ helm:
       database: nextcloud
       enabled: true
       existingSecret:
-        enabled: false
+        enabled: true
+        secretName: psql-ncuser
+        usernameKey: username
+        passwordKey: password
       host: 192.168.150.232:5432
-      password: null
       type: postgresql
       user: ncuser
     mariadb:
