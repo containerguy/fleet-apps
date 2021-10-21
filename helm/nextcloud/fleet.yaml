@@ -7,31 +7,47 @@ helm:
   values:
     ingress:
       enabled: true
+      annotations:
+        certmanager.k8s.io/acme-challenge-type: dns01
+        certmanager.k8s.io/cluster-issuer: certmanager-azure-familie-keller
+      tls:
+        - hosts:
+            - cloud-test.familie-keller.info
+          secretName: cloud-test.familie-keller.info.tls
     nextcloud:
-      host: cloud.familie-keller.info
-    mariadb:
+      host: cloud-test.familie-keller.info
+    externalDatabase:
+      database: nextcloud
       enabled: true
+      existingSecret:
+        enabled: false
+      host: 192.168.150.232:5432
+      password: null
+      type: postgresql
+      user: ncuser
+    mariadb:
+      enabled: false
       db:
         name: nextcloud
         password: "default123!"
         user: ncdbuser
       master:
         persistence:
-          enabled: true
+          enabled: false
           accessMode: ReadWriteMany
           size: 10Gi
           storageClass: longhorn
-      redis:
-        enabled: true
-        usePassword: true
-        password: "default456?"
+    redis:
+      enabled: true
+      usePassword: true
+      password: "default456?"
     cronjob:
       enabled: true
       image:
         repository: nextcloud
         pullPolicy: IfNotPresent
         schedule: "*/5 * * * *"
-        curlInsecure: true
+        curlInsecure: false
         failedJobsHistoryLimit: 5
         successfulJobsHistoryLimit: 2
         resources:
@@ -45,7 +61,7 @@ helm:
       type: ClusterIP
       port: 8080
     persistence:
-      enabled: false
+      enabled: true
       storageClass: "longhorn"
       accessMode: ReadWriteMany
       size: 5Gi
