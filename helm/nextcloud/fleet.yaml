@@ -10,6 +10,8 @@ helm:
       annotations:
         certmanager.k8s.io/acme-challenge-type: dns01
         certmanager.k8s.io/cluster-issuer: certmanager-azure-familie-keller
+        kubernetes.io/ingress.class: traefik
+        ingress.kubernetes.io/ssl-redirect: "true"
       tls:
         - hosts:
             - cloud-test.familie-keller.info
