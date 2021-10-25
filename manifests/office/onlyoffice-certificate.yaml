@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: office-test.familie-keller.info
+  namespace: cert-manager
+spec:
+  dnsNames:
+  - office-test.familie-keller.info
+  issuerRef:
+    kind: ClusterIssuer
+    name: certmanager-azure-familie-keller
+  secretName: office-test.familie-keller.info-tls
