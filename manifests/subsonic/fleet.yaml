@@ -1,1 +1,3 @@
 defaultNamespace: subsonic
+dependsOn:
+  - name: fleet-apps-helm-certmanager

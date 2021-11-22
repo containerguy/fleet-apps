@@ -1,1 +1,3 @@
 defaultNamespace: office
+dependsOn:
+  - name: fleet-apps-helm-certmanager
