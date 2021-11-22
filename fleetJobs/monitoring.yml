@@ -5,7 +5,8 @@ metadata:
   name: rancher-monitoring
   namespace: fleet-default
 spec:
-  repo: https://github.com/eluminare/fleet-apps
+  repo: git@github.com:eluminare/fleet-apps.git
+  clientSecretName: github-sshkey
   branch: main
   paths:
   - helm/rancher-monitoring
@@ -18,9 +19,10 @@ metadata:
   name: rancher-monitoring-crd
   namespace: fleet-default
 spec:
-  repo: https://github.com/eluminare/fleet-apps
+  repo: git@github.com:eluminare/fleet-apps.git
+  clientSecretName: github-sshkey
   branch: main
   paths:
   - helm/rancher-monitoring-crd
   targets:
-  - clusterSelector: {}
+  - clusterGroup: monitoring

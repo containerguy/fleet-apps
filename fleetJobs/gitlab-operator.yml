@@ -5,7 +5,8 @@ metadata:
   name: gitlab-operator
   namespace: fleet-default
 spec:
-  repo: https://github.com/eluminare/fleet-apps
+  repo: git@github.com:eluminare/fleet-apps.git
+  clientSecretName: github-sshkey
   branch: main
   paths:
   - gitlab-operator/
