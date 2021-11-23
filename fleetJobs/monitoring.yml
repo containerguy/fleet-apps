@@ -11,7 +11,9 @@ spec:
   paths:
   - helm/rancher-monitoring
   targets:
-  - clusterSelector: {}
+  - clusterSelector:
+      matchLabels:
+        app: monitoring
 ---
 kind: GitRepo
 apiVersion: fleet.cattle.io/v1alpha1
@@ -25,4 +27,6 @@ spec:
   paths:
   - helm/rancher-monitoring-crd
   targets:
-  - clusterGroup: monitoring
+  - clusterSelector:
+      matchLabels:
+        app: monitoring
