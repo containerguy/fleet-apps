@@ -13,7 +13,7 @@ spec:
     server: 192.168.150.94
   persistentVolumeReclaimPolicy: Retain
   claimRef:
-    namespace: default
+    namespace: subsonic
     name: subsonic-pvc
 ---
 kind: PersistentVolumeClaim
