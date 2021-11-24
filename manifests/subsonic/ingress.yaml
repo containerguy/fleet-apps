@@ -1,21 +1,21 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: office
-  namespace: office
+  name: subsonic
+  namespace: subsonic
 spec:
   rules:
-  - host: office-test.familie-keller.info
+  - host: subsonic-test.familie-keller.info
     http:
       paths:
       - backend:
           service:
-            name: office
+            name: subsonic
             port:
               number: 80
         path: /
         pathType: Prefix
   tls:
   - hosts:
-    - office-test.familie-keller.info
-    secretName: office-test.familie-keller.info-tls
+    - subsonic-test.familie-keller.info
+    secretName: subsonic-test.familie-keller.info-tls
