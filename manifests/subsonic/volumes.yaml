@@ -27,3 +27,33 @@ spec:
   resources:
     requests:
       storage: 10Gi
+---
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: music-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    path: /mnt/S01/Musik
+    server: 192.168.1.148
+  persistentVolumeReclaimPolicy: Retain
+  claimRef:
+    namespace: subsonic
+    name: subsonic-music-pvc
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: subsonic-music-pvc
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  
