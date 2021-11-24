@@ -48,4 +48,4 @@ spec:
           claimName: subsonic-pvc
       - name: music-data
         persistentVolumeClaim:
-          claimName: music-pvc
+          claimName: subsonic-music-pvc
