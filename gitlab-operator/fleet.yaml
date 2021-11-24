@@ -1,0 +1,3 @@
+defaultNamespace: gitlab-system
+dependsOn:
+  - name: certmanager-helm-certmanager 
