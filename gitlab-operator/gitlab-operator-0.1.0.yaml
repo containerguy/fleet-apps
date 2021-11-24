@@ -705,7 +705,7 @@ spec:
           defaultMode: 420
           secretName: webhook-server-cert
 ---
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: gitlab-serving-cert
@@ -719,7 +719,7 @@ spec:
     name: gitlab-selfsigned-issuer
   secretName: webhook-server-cert
 ---
-apiVersion: cert-manager.io/v1alpha2
+apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: gitlab-selfsigned-issuer
